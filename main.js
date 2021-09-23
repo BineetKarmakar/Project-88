@@ -11,7 +11,7 @@ block_image_height = 5;
 
 function load_img(){
 	// write code to Upload golf image on the canvas
-	fabric.Image.fromURL("golf-h1.png", function(Img){
+	fabric.Image.fromURL("golf-h.png", function(Img){
 		hole_obj = Img;
 		hole_obj.scaleToWidth(50);
 		hole_obj.scaleToHeight(50);
@@ -50,9 +50,14 @@ function my_keydown(e)
 
 	keyPressed = e.keyCode;
 	console.log(keyPressed);
+
 	if((ball_x==hole_x)&&(ball_y==hole_y)){
 		canvas.remove(ball_obj);
+
+		document.getElementById("hd3").innerHTML="You have hit the goal! Game Over";
+		document.getElementById("myCanvas").style.borderColor="Red";
 	}
+	
 	else {
 		if(keyPressed == '38')
 		{
@@ -81,29 +86,29 @@ function my_keydown(e)
 		// Write a code to move ball upward.
 		if(ball_y>=0){
 			ball_y=ball_y-block_image_height;
-			canvas.remove(player_obj);
-			new_image();
+			canvas.remove(ball_obj);
+			load_img()
 		}
 	}
 
 	function down()
 	{
 		 // Write a code to move ball downward.
-		 if(ball_y>=0){
-			ball_y=ball_y-block_image_height;
-			canvas.remove(player_obj);
-			new_image();
+		 if(ball_y<=500){
+			ball_y=ball_y+block_image_height;
+			canvas.remove(ball_obj);
+			load_img()
 		}
 	}
 
 	function left()
 	{	
 		// Write a code to move ball left side.
-		if(ball_x >5)
+		if(ball_x >=5)
 		{	
 			ball_x=ball_x-block_image_height;
-			canvas.remove(player_obj);
-			new_image();
+			canvas.remove(ball_obj);
+			load_img()
 		}
 	}
 
@@ -112,9 +117,9 @@ function my_keydown(e)
 		// Write a code to move ball right side.
 		if(ball_x <=1050)
 		{
-			ball_x=ball_x-block_image_height;
-			canvas.remove(player_obj);
-			new_image();
+			ball_x=ball_x+block_image_height;
+			canvas.remove(ball_obj);
+			load_img()
 		}
 	}
 	
